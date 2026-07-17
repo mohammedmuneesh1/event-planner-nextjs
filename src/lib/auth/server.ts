@@ -1,0 +1,15 @@
+import {createNeonAuth} from "@neondatabase/auth/next/server"
+
+export const auth = createNeonAuth({
+  baseUrl: process.env.NEON_AUTH_BASE_URL!,
+  cookies:{
+    secret: process.env.NEON_AUTH_COOKIE_SECRET!,
+  },
+});
+
+
+export function getSession(){
+    console.log('its running ')
+    return auth.getSession();
+}
+
