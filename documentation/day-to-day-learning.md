@@ -208,3 +208,6 @@ npx shadcn@latest init
 choose radix
 
 
+px shadcn@latest add card input label textarea table badge form
+
+

@@ -19,7 +19,7 @@ const DashboardContent = ({userId}:{userId:string}) => {
 
         <Button asChild>
 
-            <Link href={"/event/new"}>
+            <Link href={"/events/new"}>
                 Create Event
             </Link>
         </Button>
