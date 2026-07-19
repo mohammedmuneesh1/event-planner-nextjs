@@ -93,11 +93,13 @@
 }
 
 body {
-
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 
-  background-image:
-    radial-gradient(
+
+  background-image:radial-gradient(
       1200px circle at 20% -10%,
       rgb(168 117 255 / 0.2),
       transparent 40%
@@ -179,7 +181,7 @@ body {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground min-h-screen;
   }
   html {
     @apply font-sans;

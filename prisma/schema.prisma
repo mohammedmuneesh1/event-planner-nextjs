@@ -14,7 +14,7 @@ datasource db {
 
 
 
-enum RsvpStatus{
+ enum RsvpStatus{
    going 
    maybe
    not_going
@@ -36,10 +36,31 @@ model Event {
   updatedAt   DateTime     @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   invite       EventInvite?
+  rsvps EventRsvp[]   //virtual relation field  : There is no column called rsvps in the events table.
 
   @@index([ownerUserId, createdAt(sort: Desc)], map: "idx_events_owner")
   @@map("events")
 }
+
+
+// const event = await prisma.event.findUnique({
+//   where: { id: "E1" },
+//   include: {
+//     rsvps: true,
+//   },
+// });  
+
+//sql equavalent 
+// SELECT *
+// FROM event_rsvps
+// WHERE event_id = 'E1';
+
+
+
+
+
+
+
 
 model EventInvite {
   id        String    @id @default(uuid()) @db.Uuid
@@ -51,6 +72,8 @@ model EventInvite {
   createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
 
 event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+rsvps EventRsvp[]
 
   @@map("event_invites")
 }
@@ -67,13 +90,22 @@ model EventRsvp {
   email           String
 
   emailNormalized String    @map("email_normalized")
-  
 
   status          RsvpStatus
 
   respondedAt     DateTime    @default(now()) @map("responded_at") @db.Timestamptz(6)
   createdAt       DateTime    @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt       DateTime    @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  //gen-2
+
+  event  Event         @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  invite EventInvite?  @relation(fields: [inviteId], references: [id], onDelete: SetNull)
+
+
+//   event Event @relation(fields: [eventId],references: [id],onDelete:Cascade )
+//  invite EventInvite @relation(fields: [inviteId],references: [id],onDelete:Cascade )
+  
 
   @@unique([eventId, emailNormalized])
   @@index([eventId, createdAt(sort: Desc)], map: "idx_rsvps_event")

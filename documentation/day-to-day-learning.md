@@ -210,4 +210,33 @@ choose radix
 
 px shadcn@latest add card input label textarea table badge form
 
+ npx shadcn@latest info  --> to check shadcn installation components
 
+
+ import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "@/components/ui/form";
+
+
+
+npx shadcn@latest view form   --> this shows the isntalled or not
+
+npx shadcn@latest add form --overwrite   --> foreced installation of form 
+
+
+
+3. Force a fresh registry fetch (clear npx cache)
+
+npm cache clean --force
+npx clear-npx-cache
+npx shadcn@latest add form
+
+
+
+
+//==================== shadcn end
+
+ *#*#4636#*# 
